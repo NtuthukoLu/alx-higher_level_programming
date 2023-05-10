@@ -1,4 +1,4 @@
-#include "lists.h"
+#include "list.h"
 
 /**
  * insert_node - inserts a new number at a given position.
