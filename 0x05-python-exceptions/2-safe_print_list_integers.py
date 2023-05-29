@@ -14,11 +14,11 @@ def safe_print_list_integers(my_list=[], x=0):
     Exception: If x is greater than the length of my_list
     """
     elements_printed = 0
-    for element in my_list[:x]:
+    for element in range(0, x):
         try:
-            print("{:d}".format(element), end="")
+            print("{:d}".format(my_list[element]), end="")
             elements_printed += 1
-            print()
         except (TypeError, ValueError):
             pass
+        print()
     return elements_printed
