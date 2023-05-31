@@ -82,3 +82,12 @@ class Square:
         else:
             return True
         return False
+
+    def __validate_pos(self, position):
+        """
+        validates the position, checking for type errors
+        """
+        if not isinstance(position, type((0, 0))):
+            raise TypeError("position must be a tuple of 2 positive integers")
+            return False
+        return True
