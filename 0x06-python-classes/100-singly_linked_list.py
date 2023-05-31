@@ -1,10 +1,12 @@
 #!/usr/bin/python3
+"""Class for singly linked list"""
 
 
 class Node:
     """
     Node class for a singly linked list
     """
+
     def __init__(self, data, next_node=None):
         """
         initialization called when instance of class created
@@ -68,6 +70,7 @@ class SinglyLinkedList:
     contains nodes for a singly linked list and methods for ->
     insertion
     """
+
     def __init__(self):
         """
         initialization called when instance of class created
