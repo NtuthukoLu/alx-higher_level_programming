@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+
+
 def safe_print_list_integers(my_list=[], x=0):
     """
     Prints the first x elements of a list and only integers.
@@ -13,6 +15,7 @@ def safe_print_list_integers(my_list=[], x=0):
     Raises:
     Exception: If x is greater than the length of my_list
     """
+    element = 0
     elements_printed = 0
     for element in range(0, x):
         try:
@@ -20,4 +23,6 @@ def safe_print_list_integers(my_list=[], x=0):
             elements_printed += 1
         except (ValueError, TypeError):
             pass
+
+    print()    
     return elements_printed
