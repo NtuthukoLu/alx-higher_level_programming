@@ -13,7 +13,7 @@ class Rectangle():
     def height(self):
         """getter for height property"""
         return self.__height
-    
+
     @height.setter
     def height(self, value):
         """setter for height property"""
