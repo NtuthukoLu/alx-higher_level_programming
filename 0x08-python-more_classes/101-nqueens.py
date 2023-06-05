@@ -2,10 +2,12 @@
 
 import sys
 
+
 def init_board(n):
     """Initialize an `n`x`n` sized chessboard with 0's."""
     board = [[' ' for i in range(n)] for j in range(n)]
     return (board)
+
 
 def get_solution(board):
     """Return the list of lists representation of a solved chessboard."""
@@ -16,6 +18,7 @@ def get_solution(board):
                 solution.append([r, c])
                 break
     return (solution)
+
 
 def xout(board, row, col):
     """X out spots on a chessboard."""
@@ -48,6 +51,7 @@ def xout(board, row, col):
         if c >= 0:
             board[r][c] = "x"
 
+
 def recursive_solve(board, row, queens, solutions):
     """Recursively solve an N-queens puzzle. """
     if queens == len(board):
@@ -64,6 +68,7 @@ def recursive_solve(board, row, queens, solutions):
 
     return (solutions)
 
+
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
@@ -77,5 +82,3 @@ if __name__ == "__main__":
 
     board = init_board(int(sys.argv[1]))
     solutions = recursive_solve(board, 0, 0, [])
-    for sol in solutions:
-        print(sol)
