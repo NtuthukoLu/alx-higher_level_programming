@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""6-rectangle"""
+"""9-rectangle"""
 
 
 class Rectangle():
@@ -69,3 +69,19 @@ class Rectangle():
         if self.width == 0 or self.height == 0:
             return 0
         return 2 * self.__width + 2 * self.__height
+
+    def bigger_or_equal(rect_1, rect_2):
+        """return large rectrangle"""
+        if type(rect_1) != Rectangle:
+            raise TypeError("rect_1 must be an instance of Rectangle")
+        if type(rect_2) != Rectangle:
+            raise TypeError("rect_2 must be an instance of Rectangle")
+        elif rect_2.area() > rect_1.area():
+            return rect_2
+        else:
+            return rect_1
+
+    @classmethod
+    def square(cls, size=0):
+        """returns a new rectangle width and height"""
+        return (cls(size, size))
