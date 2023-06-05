@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""3-rectangle"""
+"""4-rectangle"""
 
 
 class Rectangle():
@@ -18,6 +18,9 @@ class Rectangle():
             string += "#" * self.__width + "\n"
         string += "#" * self.__width
         return string
+
+    def __repr__(self):
+        return "Rectangle({}, {}").format(self.__width, self.__height)
 
     @property
     def height(self):
