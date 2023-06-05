@@ -1,41 +1,52 @@
 #!/usr/bin/python3
-"""nqueens"""
+
 import sys
 
-def board_safe(chess_board, column, num):
-    for i in range(0, num):
-        if chess_board[i][column] == 1:
+def solve(board, col, n):
+    if col >= n:
+        print_board(board, n)
+        return
+    for i in range(n):
+        if is_safe(board, i, col, n):
+            board[i][col] = 1
+            solve(board, col + 1, n)
+            board[i][col] = 0
+
+def is_safe(board, row, col, n):
+    for i in range(col):
+        if board[row][i] == 1:
+            return False
+    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+        if board[i][j] == 1:
+            return False
+    for i, j in zip(range(row, n, 1), range(col, -1, -1)):
+        if board[i][j] == 1:
             return False
     return True
 
-def get_n_queens(chess_board, column, num):
-    if column >= num:
-        return True
-    for i in range(0, num):
-        if board_safe(chess_board, column, num):
-            chess_board[i][column] = 1
-            if get_n_queens(chess_board, column + 1, num):
-                return True
-            chess_board[i][column] = 0
-    return False
+def print_board(board, n):
+    for i in range(n):
+        for j in range(n):
+            if board[i][j] == 1:
+                print(i, end="")
+                if j != n - 1:
+                    print(", ", end="")
+        if i != n - 1:
+            print(", ", end="")
+    print()
 
-args = sys.argv
 
-if len(args) != 2:
-    exit(1)
-if not args[1].isdigit():
-    print("N must be a number")
-    exit(1)
-
-num = int(args[1])
-if num < 4:
-    print("N must be at least 4")
-    exit(1)
-
-solutions = []
-board = [[0 for a in range(0, num)] for b in range(0, num)]
-running = True
-while running:
-    sol = get_n_queens(board, 0, num)
-    solutions.append(sol)
-    running = False
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: nqueens N")
+        exit(1)
+    try:
+        n = int(sys.argv[1])
+    except:
+        print("N must be a number")
+        exit(1)
+    if n < 4:
+        print("N must be at least 4")
+        exit(1)
+    board = [[0 for i in range(n)] for j in range(n)]
+    solve(board, 0, n)
