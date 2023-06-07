@@ -5,3 +5,4 @@
 class LockedClass:
     """Stops User from instanting new locked class"""
     __slots__ = ["first_name"]
+    
