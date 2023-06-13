@@ -18,6 +18,6 @@ def pascal_triangle(n):
     back = new_list[0]
     for i in range(1, n):
         for j in range(1, i):
-            new_list[i][j] = new_list[i - 1][j - 1] + new_list[i -1][j]
+            new_list[i][j] = new_list[i - 1][j - 1] + new_list[i - 1][j]
         new_list[i].append(1)
     return new_list
