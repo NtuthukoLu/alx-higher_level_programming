@@ -19,4 +19,4 @@ class Student:
         for item in attrs:
             if item in dictionary:
                 studInfo[item] = dictionary[item]
-        return studInfo    
+        return studInfo
