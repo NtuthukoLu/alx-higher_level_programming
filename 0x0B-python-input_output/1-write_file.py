@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-"""1-number_of_line"""
+"""1-number_of_line module"""
 
 
-def number_of_lines(filename=""):
+def write_file(filename="", text=""):
     """gets the number of lines from filename"""
-    with open(filename, encoding="utf-8") as myFile:
-        return sum([1 for line in myFile])
+    with open(filename, mode="w", encoding="utf-8") as myfile:
+        return myfile.write(text)
