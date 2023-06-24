@@ -52,6 +52,10 @@ class Rectangle(Base):
         }
         return selfDict
 
+    def to_csv(self):
+        """list containing csv rep of rectangle"""
+        return [self.id, self.width, self.height, self.x, self.y]
+
     @property
     def width(self):
         """Getter for __width"""
