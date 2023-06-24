@@ -81,3 +81,82 @@ class Base:
         except ValueError:
             dicList = []
         return dicList
+
+    @staticmethod
+    def to_csv_lines(list_csv):
+        """returns CSV string representation from list of sub class
+            objects represented in their csv form
+        """
+        builder = ""
+        for csv in list_csv:
+            for i, ele in enumerate(csv):
+                builder += str(ele)
+                if i != len(csv) - 1:
+                    builder += ','
+            builder += '\n'
+        return builder
+
+    @staticmethod
+    def from_csv_lines(list_csv):
+        """returns list of CSV instance objects (containing sub class data)
+            ->from list of lines of data
+        """
+        if list_csv is None or len(list_csv) == 0:
+            return []
+
+        csv_data = []
+        for line in list_csv:
+            raw_data = line.strip('\n').split(',')
+            csv_data.append([int(ele) for ele in raw_data])
+        return csv_data
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        """saves a list of objects to a file as a JSON string
+        """
+        new_list = None
+        list_obj_copy = list_objs.copy()
+        filename = cls.__name__ + ".json"
+
+        super_list = []
+        for ele in list_obj_copy:
+            if issubclass(type(ele), Base):
+                super_list.append(ele.to_dictionary())
+        write_str = cls.to_json_string(super_list)
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write(write_str)
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """saves a list of sub-class objects to their file as csv
+        """
+        list_obj_copy = list_objs.copy()
+        # get_cname_from_sublist also removes non subclass eles, so copy
+        filename = cls.__name__ + ".csv"
+        super_list = []
+
+        for ele in list_obj_copy:
+            if issubclass(type(ele), Base):
+                super_list.append(ele.to_csv())
+        write_str = cls.to_csv_lines(super_list)
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write(write_str)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """loads a list of objects from their csv file
+        """
+        filename = cls.__name__ + ".csv"
+        try:
+            with open(filename, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+        except:
+            return []
+
+        inst_list = []
+        csv_list_list = cls.from_csv_lines(lines)
+        for csv_inst in csv_list_list:
+            new_obj = cls(1, 1)
+            new_obj.update(*csv_inst)
+            inst_list.append(new_obj)
+        return inst_list

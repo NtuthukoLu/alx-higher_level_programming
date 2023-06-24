@@ -36,6 +36,10 @@ class Square(Rectangle):
         }
         return selfDict
 
+    def to_csv(self):
+        """ list containing csv rep of rectangle"""
+        return [self.id, self.size, self.x, self.y]
+
     @property
     def size(self):
         return self.width
