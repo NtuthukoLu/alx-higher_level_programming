@@ -150,7 +150,7 @@ class Base:
         try:
             with open(filename, 'r', encoding='utf-8') as f:
                 lines = f.readlines()
-        except:
+        except ValueError:
             return []
 
         inst_list = []
