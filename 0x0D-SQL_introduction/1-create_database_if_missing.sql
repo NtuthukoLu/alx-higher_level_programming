@@ -1,2 +1,3 @@
 --Creates database in MySQL server
-CREATE DATABASE IF NOT EXISTS 'hbtn_0c_0';
+--DDL to create database
+CREATE DATABASE IF NOT EXISTS hbtn_0c_0;
