@@ -3,4 +3,4 @@ SELECT city,avg_temp FROM (SELECT city,
  FROM temperatures
  WHERE month = 7 OR month = 8
  GROUP BY city
- ORDER BY AVG(value) DESC) results LIMIT 3;
+ ORDER BY avg_temp  results LIMIT 3;
