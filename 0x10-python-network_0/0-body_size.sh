@@ -18,4 +18,4 @@ size=$(wc -c < "$temp_file")
 # Clean up the temporary file
 rm "$temp_file"
 
-echo "Size of the response body: $size bytes"
+echo "$size"
