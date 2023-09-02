@@ -1,8 +1,8 @@
 #!/usr/bin/python3
+"""
 script that fetches `https://intranet.hbtn.io/status`.
 """
 from urllib import request
-"""
 
 if __name__ == "__main__":
     req = request.Request('https://intranet.hbtn.io/status')
