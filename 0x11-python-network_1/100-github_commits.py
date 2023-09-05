@@ -3,7 +3,7 @@
 Python script that takes 2 arguments in order to solve a challenge.
 """
 import requests
-    import sys
+import sys
 
 if __name__ == "__main__":
     url = "https://api.github.com/"
