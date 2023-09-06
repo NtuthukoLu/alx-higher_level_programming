@@ -5,20 +5,26 @@ Python script that takes 2 arguments in order to solve a challenge.
 import requests
 import sys
 
-if __name__ == "__main__":
-    url = "https://api.github.com/"
-    username = sys.argv[1]
-    repo = sys.argv[2]
-    commits_url = url + "repos/{}/{}/commits".format(username, repo)
-    response = requests.get(commits_url)
-    if response.status_code == requests.codes.ok and len(response.text) > 0:
-        try:
-            my_obj = response.json()
-            for i, obj in enumerate(my_obj):
-                if i == 10:
-                    break
-                if type(obj) is dict:
-                    name = obj.get('commit').get('author').get('name')
-                    print("{}: {}".format(obj.get('sha'), name))
-        except ValueError as invalid_json:
-            pass
+if len(sys.argv) != 3:
+    print("Usage: ./100-github_commits.py <repository_name> <owner_name>")
+    sys.exit(1)
+
+repository_name, owner_name = sys.argv[1], sys.argv[2]
+url = f"https://api.github.com/repos/{owner_name}/{repository_name}/commits"
+
+try:
+    response = requests.get(url)
+    response.raise_for_status()  # Raise an exception for HTTP errors
+    commits = response.json()
+
+    for commit in commits[:10]:
+        sha = commit["sha"]
+        author_name = commit["commit"]["author"]["name"]
+        print(f"{sha}: {author_name}")
+
+except requests.exceptions.RequestException as e:
+    print(f"Error: {e}")
+except requests.exceptions.HTTPError as e:
+    print(f"HTTP Error: {e.response.status_code}")
+except KeyError as e:
+    print(f"KeyError: {e}")
